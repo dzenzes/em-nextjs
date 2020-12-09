@@ -1,0 +1,30 @@
+import Layout from "../components/Layout";
+const About = ({ name, version, ...props }) => {
+  return (
+    <>
+      <Layout pageTitle={`${name} | About`} description={version}>
+        <h1 className="title">Welcome to my blog!</h1>
+
+        <p className="description">{version}</p>
+
+        <p>
+          I am a very exciting person. I know this because I'm following a very
+          exciting tutorial, and a not-exciting person wouldn't do that.
+        </p>
+      </Layout>
+    </>
+  );
+};
+
+export default About;
+
+export async function getStaticProps() {
+  const packageJson = await import(`../package.json`);
+
+  return {
+    props: {
+      name: packageJson.name,
+      version: packageJson.version,
+    },
+  };
+}
